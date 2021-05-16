@@ -15,14 +15,14 @@ def movie_review(genre, year, rated):
     warnings.filterwarnings('ignore')
 
     users = pd.read_csv('data/users.dat', sep='::', names=['user_id', 'twitter_id']) 
-    #print(users.head())
+  
 
     ratings = pd.read_csv('data/ratings.dat', sep='::', names=['user_id', 'movie_id', 'rating', 'rating_timestamp']).sort_values("rating_timestamp")
     ratings["rating_timestamp"] = pd.to_datetime(ratings["rating_timestamp"], unit='s')
-    #print(ratings.head())
+ 
 
     movies = pd.read_csv('data/movies.dat', sep='::', header=None, names=['movie_id', 'movie_title', 'genres'])
-    #print(movies.head())
+ 
 
     movies_rating = (ratings.set_index("movie_id").join(movies.set_index("movie_id"),how="left"))
     dummies = movies_rating['genres'].str.get_dummies()
@@ -31,7 +31,7 @@ def movie_review(genre, year, rated):
     tidy_movie_ratings["movie_title"] = tidy_movie_ratings["movie_title"].str[:-7]
     tidy_movie_ratings.reset_index(inplace=True)
 
-    #print(tidy_movie_ratings.head(2))
+
 
     cols = ["movie_title", "rating", "production_year", genre , "movie_id"]
     condition0 = tidy_movie_ratings["production_year"].astype(int) == year
