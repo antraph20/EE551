@@ -119,7 +119,7 @@ def main():
             else:
                 print ("Please enter either 1 for best or 2 for worse.")
                 rated = int(input())
-        
+        print ("results being calculated...") 
         x = movie_review(genre_stir,year,rated)
         print (x)
         print ("Would you like to see another review? Enter 1 for yes or 2 for no")
